@@ -25,7 +25,7 @@ class BiometricPromptManager(private val activity: AppCompatActivity) {
             .setDescription(description)
             .setAllowedAuthenticators(authenticators)
         if (Build.VERSION.SDK_INT >= 30) {
-            promptInfo.setNegativeButtonText("Cancel")
+           // promptInfo.setNegativeButtonText("Cancel")
         }
 
         when (manager.canAuthenticate(authenticators)) {
