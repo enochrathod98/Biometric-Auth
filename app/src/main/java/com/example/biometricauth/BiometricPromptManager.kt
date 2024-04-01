@@ -25,7 +25,7 @@ class BiometricPromptManager(private val activity: AppCompatActivity) {
             .setDescription(description)
             .setAllowedAuthenticators(authenticators)
         if (Build.VERSION.SDK_INT >= 30) {
-           // promptInfo.setNegativeButtonText("Cancel")
+            // promptInfo.setNegativeButtonText("Cancel")
         }
 
         when (manager.canAuthenticate(authenticators)) {
@@ -66,7 +66,10 @@ class BiometricPromptManager(private val activity: AppCompatActivity) {
                 }
             }
         )
-        prompt.authenticate(promptInfo.build())
+        val secretKey = generateSecretKey()
+        val cipher = getCipher(secretKey)
+        val cryptoObject = BiometricPrompt.CryptoObject(cipher)
+        prompt.authenticate(promptInfo.build(), cryptoObject)
     }
 
     sealed interface BiometricResult {
